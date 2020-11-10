@@ -1,0 +1,12 @@
+<h1><%= @toy.name %></h1>
+<h3>Category: <%= @toy.category %></h3>
+<p>belongs to: <%= @toy.user.name %></p>
+
+<h2>The toys of Toyville:</h2>
+<% Toy.all.each do |t| %>
+    <p><a href="/toys/<%= t.id %>"><%= t.name %></a></p>
+<% end %>
+
+<br><a href="/users/<%= current_user.slug %>">MY TOY BOX</a><br>
+<a href="/">TOYVILLE FRONT GATE</a>
+

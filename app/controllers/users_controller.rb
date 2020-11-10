@@ -31,6 +31,15 @@ class UsersController < ApplicationController
         end
     end
 
+    get '/users/:slug/edit' do
+        if is_logged_in?(session)
+            @user = current_user
+            erb :'/users/edit'
+        else
+            redirect '/login'
+        end
+    end
+
     post '/signup' do
         if User.all.map{|u| u.username}.include?(params[:username])
             redirect '/signup'
@@ -48,6 +57,15 @@ class UsersController < ApplicationController
         else
             redirect "/login"
         end
+    end
+
+    patch '/users/:slug' do
+        @user = current_user
+        if @user 
+            @user.update(name: params[:name])
+            redirect "/users/#{@user.slug}"
+        end
+        redirect '/login'
     end
 
     helpers do

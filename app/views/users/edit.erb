@@ -1,0 +1,7 @@
+<h1>Edit your Name.</h1>
+<form action="/users/<%= @user.slug %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+    <input type="text" name="name" value="<%= @user.name %>">
+    
+    <input type="submit" value="Update my stuff!">
+</form>
