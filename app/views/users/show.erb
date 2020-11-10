@@ -1,0 +1,9 @@
+<h1><%= @user.name %>'s Toy Box!</h1>
+
+<h2>Toys:</h2>
+<% @user.toys.each do |toy| %>
+    <br><h2><%= toy.name %></h2><br>
+    <p>Category: <%= toy.category %></p><br>
+<% end %>
+
+<a href="/logout">Logout</a>
