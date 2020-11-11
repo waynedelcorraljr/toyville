@@ -23,8 +23,13 @@ class ToysController < ApplicationController
     end
 
     post '/toys/new' do
-        toy = Toy.create(name: params[:name], category: params[:category], user_id: current_user.id)
-        redirect "/toys/#{toy.id}"
+        if !params[:name].empty? && !params[:category].empty?
+            toy = Toy.create(name: params[:name], category: params[:category], user_id: current_user.id)
+            redirect "/toys/#{toy.id}"
+        else
+            redirect '/toys/new'
+        end
+        
     end
 
     patch '/toys/:id' do 
