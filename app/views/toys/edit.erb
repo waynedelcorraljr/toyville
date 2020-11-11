@@ -1,0 +1,7 @@
+<h1>Edit a toy!</h1>
+<form action="/toys/<%= @toy.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+    <input type="text" name="name" value="<%= @toy.name %>">
+    <input type="text" name="category" value="<%= @toy.category %>">
+    <input type="submit" value="Make my changes!">
+</form>

@@ -1,12 +1,20 @@
 <h1><%= @toy.name %></h1>
-<h3>Category: <%= @toy.category %></h3>
+<h4>Category: <%= @toy.category %></h4>
 <p>belongs to: <%= @toy.user.name %></p>
 
-<h2>The toys of Toyville:</h2>
-<% Toy.all.each do |t| %>
+<p><a href="/toys/<%= @toy.id %>/edit">Edit this toy.</a></p>
+<p><a href="/users/<%= current_user.slug %>">MY TOY BOX</a><p>
+<form action="/toys/<%= @toy.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Throw this toy out =(">
+</form>
+<br>
+
+
+<h2>The Toys of Toyville:</h2>
+<% Toy.all.sort_by(&:user).each do |t| %>
     <p><a href="/toys/<%= t.id %>"><%= t.name %></a></p>
 <% end %>
 
-<br><a href="/users/<%= current_user.slug %>">MY TOY BOX</a><br>
 <a href="/">TOYVILLE FRONT GATE</a>
 
