@@ -28,7 +28,7 @@ class UsersController < ApplicationController
             # binding.pry
             erb :'/users/show'
         else
-            flash[:message] = "You must be logged in to view this page."
+            flash[:message] = "You must be logged in to view user's page."
             redirect '/login'
         end
     end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
     post '/signup' do
         if User.all.map{|u| u.username}.include?(params[:username])
-            # flash[:message] = "That username already exists."
+            flash[:message] = "That username already exists, please try again with a different username."
             redirect '/signup'
         end
         if !params[:username].empty? && !params[:password].empty?
@@ -62,6 +62,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect "/users/#{@user.slug}"
         else
+            flash[:message] = "username or password not found"
             redirect "/login"
         end
     end
@@ -72,6 +73,7 @@ class UsersController < ApplicationController
             @user.update(name: params[:name])
             redirect "/users/#{@user.slug}"
         end
+        flash[:message] = "You cannot edit other user's information."
         redirect '/login'
     end
 

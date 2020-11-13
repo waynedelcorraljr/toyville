@@ -14,9 +14,12 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-    
+      <% if flash.has?(:message) %>
+    <div class="flash-banner">
+      <%= flash[:message] %>
+    </div>
+      <% end %>
     <div class="wrapper"> 
-
         <%= yield %>
 
       <footer class="branding">

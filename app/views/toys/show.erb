@@ -2,8 +2,8 @@
 <h4>Category: <%= @toy.category %></h4>
 <p>belongs to: <%= @toy.user.name %></p>
 
-<p><a href="/toys/<%= @toy.id %>/edit">Edit this toy.</a></p>
-<p><a href="/users/<%= current_user.slug %>">MY TOY BOX</a><p>
+<p><a class="button" href="/toys/<%= @toy.id %>/edit">Edit this toy.</a></p>
+<p><a class="button" href="/users/<%= current_user.slug %>">MY TOY BOX</a><p>
 <form action="/toys/<%= @toy.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Throw this toy out =(">
@@ -16,5 +16,5 @@
     <p><a href="/toys/<%= t.id %>"><%= t.name %></a></p>
 <% end %>
 
-<a href="/">TOYVILLE FRONT GATE</a>
+<a class="button" href="/">TOYVILLE FRONT GATE</a>
 
