@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
 
     get '/signup' do
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
             # binding.pry
             erb :'/users/show'
         else
+            flash[:message] = "You must be logged in to view this page."
             redirect '/login'
         end
     end
@@ -42,11 +44,16 @@ class UsersController < ApplicationController
 
     post '/signup' do
         if User.all.map{|u| u.username}.include?(params[:username])
+            # flash[:message] = "That username already exists."
             redirect '/signup'
         end
+        if !params[:username].empty? && !params[:password].empty?
         user = User.create(name: params[:name], username: params[:username], password: params[:password])
         session[:user_id] = user.id
         redirect "/users/#{user.slug}"
+        else
+            redirect '/signup'
+        end
     end
 
     post '/login' do
@@ -61,7 +68,7 @@ class UsersController < ApplicationController
 
     patch '/users/:slug' do
         @user = current_user
-        if @user 
+        if @user && !params[:name].empty?
             @user.update(name: params[:name])
             redirect "/users/#{@user.slug}"
         end
