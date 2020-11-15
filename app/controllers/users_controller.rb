@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-    #    session.clear
         if is_logged_in?(session)
             redirect "/users/#{current_user.slug}"
         end
@@ -52,6 +51,7 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         redirect "/users/#{user.slug}"
         else
+            flash[:message] = "No blank entry allowed."
             redirect '/signup'
         end
     end

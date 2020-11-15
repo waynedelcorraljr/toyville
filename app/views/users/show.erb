@@ -2,11 +2,14 @@
 
 <h2>Toys:</h2>
 <% @user.toys.each do |toy| %>
-    <br><a href="/toys/<%= toy.id %>"><h3><%= toy.name %></h3></a><br>
+    <br><a class="toys" href="/toys/<%= toy.id %>"><h3><%= toy.name %></h3></a>
     <p>Category: <%= toy.category %></p><br>
 <% end %>
 
-<br><a class="button" href="/toys/new">Add a toy to your Box!</a><br><br>
+<br><br><a class="button" href="/toys/new">Add a toy to your Box!</a><br><br>
 
 <a class="button" href="/users/<%= @user.slug %>/edit">Edit your display name.</a><br><br>
+<br>
+<br>
+<a class="button" href="/">Toyville Front Gate</a><br><br>
 <a class="button" href="/logout">Logout</a>

@@ -13,8 +13,9 @@
 
 <h2>The Toys of Toyville:</h2>
 <% Toy.all.sort_by(&:user).each do |t| %>
-    <p><a href="/toys/<%= t.id %>"><%= t.name %></a></p>
+    <p><a class="toys" href="/toys/<%= t.id %>"><%= t.name %></a></p>
 <% end %>
-
-<a class="button" href="/">TOYVILLE FRONT GATE</a>
+<br>
+<a class="button" href="/">Toyville Front Gate</a><br><br>
+<a class="button" href="/logout">Logout</a>
 
