@@ -25,6 +25,9 @@ class ToysController < ApplicationController
 
     post '/toys/new' do
         if !params[:name].empty? && !params[:category].empty?
+            # user = current_user
+            # toy = user.toys.build(name: params[:name], category: params[:category])
+            # binding.pry
             toy = Toy.create(name: params[:name], category: params[:category], user_id: current_user.id)
             redirect "/toys/#{toy.id}"
         else
@@ -36,7 +39,7 @@ class ToysController < ApplicationController
 
     patch '/toys/:id' do 
         toy = Toy.find(params[:id])
-        if !params[:name].empty? && !params[:category].empty?
+        if !params[:name].empty? && !params[:category].empty? && current_user.id == toy.user_id
             toy.update(name: params[:name], category: params[:category])
             redirect "/toys/#{toy.id}"
         else
