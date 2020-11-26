@@ -3,14 +3,14 @@ class UsersController < ApplicationController
 
     get '/signup' do
         # binding.pry
-        if is_logged_in?(session)
+        if is_logged_in?
             redirect "/users/#{current_user.slug}"
         end
         erb :'/users/signup' 
     end
 
     get '/login' do
-        if is_logged_in?(session)
+        if is_logged_in?
             redirect "/users/#{current_user.slug}"
         end
         erb :'/users/login'
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     end
 
     get '/users/:slug' do
-        if is_logged_in?(session)
+        if is_logged_in?
             @user = current_user
             # binding.pry
             erb :'/users/show'
@@ -33,10 +33,11 @@ class UsersController < ApplicationController
     end
 
     get '/users/:slug/edit' do
-        if is_logged_in?(session)
+        if is_logged_in?
             @user = current_user
             erb :'/users/edit'
         else
+            flash[:message] = "You must be logged in to edit."
             redirect '/login'
         end
     end
@@ -75,16 +76,6 @@ class UsersController < ApplicationController
         end
         flash[:message] = "You cannot edit other user's information."
         redirect '/login'
-    end
-
-    helpers do
-        def is_logged_in?(session)
-          !!session[:user_id]
-        end
-    
-        def current_user
-          User.find(session[:user_id])
-        end
     end
 
 end
