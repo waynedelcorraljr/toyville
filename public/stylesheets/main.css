@@ -111,7 +111,7 @@
 @media screen and (max-width: 600px) {
   .flash-banner {
     width: 100%;
-    background-color: crimson;
+    background-color: rgb(8, 163, 247);
     text-align: center;
     height: 20px;
     padding: 10px;
